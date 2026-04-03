@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const PIPELINE_ROWS = [
@@ -206,13 +207,13 @@ export default function ArchitecturePreview() {
 
         {/* Link to docs */}
         <div className="mt-8 text-center">
-          <a
+          <Link
             href="/docs/architecture"
             className="inline-flex items-center gap-2 text-sm text-content-secondary hover:text-brand-gold transition-colors duration-200"
           >
             Full architecture documentation
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
