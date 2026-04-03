@@ -1,274 +1,213 @@
 <div align="center">
-  <img src="docs/assets/logo.svg" alt="Aurevia Estate AI" width="100%" />
-</div>
 
-<div align="center">
+<img src="docs/assets/logo.svg" alt="Aurevia Estate AI" width="100%" />
 
-## Aurevia Estate AI
+<br />
 
-### Premium AI Command Center for Real Estate Demand, Qualification, and Routing
+# Aurevia Estate AI
 
-Turn fragmented inbound interest into structured leasing and sales momentum across website, WhatsApp, and email with a product designed to look and feel like a venture-backed PropTech SaaS platform.
+### Intelligent Conversations. Qualified Leads. Closed Deals.
+
+**AI-native lead automation for real estate — built to production standard.**
+
+<br />
 
 <p>
-  <img src="https://img.shields.io/badge/Brand-Dark%20Luxury%20PropTech-C9A84C?style=for-the-badge" alt="Brand" />
-  <img src="https://img.shields.io/badge/Status-Portfolio%20Ready-22C55E?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/UI-Premium%20Dashboard-111827?style=for-the-badge" alt="UI" />
+  <img src="https://img.shields.io/badge/Product-Premium%20PropTech%20SaaS-C9A84C?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Portfolio%20Ready-22C55E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Demo-Live%20Fallback%20Mode-F59E0B?style=for-the-badge" />
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Next.js-14-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/FastAPI-Production%20API-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/OpenAI-RAG%20Orchestration-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Qdrant-Vector%20Knowledge-DC244C?style=flat-square" alt="Qdrant" />
-  <img src="https://img.shields.io/badge/PostgreSQL-Operational%20State-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/Demo%20Mode-Fallback%20Ready-F59E0B?style=flat-square" alt="Demo Mode" />
-  <img src="https://img.shields.io/badge/Deploy-Vercel%20%2B%20Render%20%2B%20Railway-3B82F6?style=flat-square" alt="Deployment" />
+  <img src="https://img.shields.io/badge/Next.js%2014-000000?style=flat-square&logo=next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/GPT--4o-412991?style=flat-square&logo=openai&logoColor=white" />
+  <img src="https://img.shields.io/badge/Qdrant-DC244C?style=flat-square" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
 </p>
 
 </div>
 
 ---
 
-## Product Statement
+## 🏛 What It Is
 
-**Aurevia Estate AI** is a premium brokerage automation system built to capture, qualify, enrich, and route real estate demand through a single AI-led operating layer.
-
-It combines:
-
-- **inbound channel intake** for website, email, and WhatsApp workflows
-- **LLM-powered conversation intelligence** for qualification and response generation
-- **RAG-backed knowledge retrieval** for grounded answers and document context
-- **lead creation and escalation logic** for high-intent buyer or renter journeys
-- **a polished admin command center** that feels portfolio-ready, not prototype-grade
-
-This repository is intentionally built to showcase both **product taste** and **system thinking**.
+A full-stack AI brokerage platform that converts fragmented inbound interest — from WhatsApp, email, and web — into structured, routed, qualified leads. Every layer is production-shaped: real models, real databases, real orchestration logic.
 
 ---
 
-## Why It Stands Out
+## 🧠 AI System Flow
 
-| Surface | What It Delivers |
-| --- | --- |
-| **AI Orchestration** | Extracts intent, location, budget, and property preferences from natural language conversations |
-| **Qualified Demand Engine** | Converts raw inbound messages into structured lead records, follow-ups, and escalations |
-| **Knowledge Layer** | Supports RAG ingestion and retrieval over brokerage documents and market context |
-| **Operations Dashboard** | Presents the workflow through a premium dark-luxury interface designed for demos and portfolio reviews |
-| **Demo Readiness** | Keeps the frontend full and presentable through controlled demo fallbacks when backend services are unavailable |
-
----
-
-## Capability Highlights
-
-### AI-Powered Leasing and Sales Workflow
-
-- capture inbound demand from multiple channels
-- interpret buyer or renter intent from natural language
-- extract structured lead data such as budget, location, and property type
-- generate agent-style replies and workflow decisions
-- escalate high-value demand into priority handling paths
-
-### Premium SaaS Presentation Layer
-
-- cinematic dark dashboard with luxury gold accents
-- polished loading, empty, and error states
-- glassmorphism, layered panels, and premium product framing
-- recruiter-friendly landing page and dashboard experience
-
-### Deployment and Demo Confidence
-
-- `NEXT_PUBLIC_DEMO_MODE` for resilient frontend demos
-- deployment scaffolding for Vercel, Render, Railway, and Hugging Face Space workflows
-- environment templates prepared for local development and hosted deployment
+```
+[ Inbound Channels ]  ──────────────────────────────────────────
+  Website · WhatsApp · Email
+         │
+         ▼
+[ Intelligence Layer ]  ────────────────────────────────────────
+  Intent extraction · Entity recognition · Budget / location / type
+         │
+         ▼
+[ Orchestration Engine ]  ──────────────────────────────────────
+  GPT-4o orchestrator · Tool selection · RAG context retrieval
+         │
+    ┌────┴────────────────────────────────────────────┐
+    ▼                    ▼                            ▼
+[ Action System ]   [ Knowledge Index ]         [ CRM Layer ]
+  Lead creation       Qdrant vectors              PostgreSQL
+  Follow-up queue     Brokerage docs              Lead records
+  Escalation logic    Market context              Conversation state
+    │
+    ▼
+[ Command Center ]  ────────────────────────────────────────────
+  Premium dashboard · Analytics · Knowledge ops · Settings
+```
 
 ---
 
-## Product Surfaces
+## ⚡ Core Capabilities
+
+**🚀 AI Lead Engine**
+- Captures demand from website, WhatsApp, and email in real time
+- Extracts structured data — intent, budget, location, property type — from natural language
+- Generates agent-grade replies via GPT-4o orchestration
+
+**🧠 RAG Intelligence Layer**
+- Upload, chunk, embed, and index brokerage documents
+- Text extraction pipeline for TXT, MD, JSON, CSV (PDF/DOCX extension points)
+- Qdrant vector store with cosine similarity retrieval
+
+**📊 Operations Command Center**
+- Lead pipeline with qualification confidence scores
+- Conversation threads with AI response quality visibility
+- Escalation routing for high-intent buyers
+- Follow-up automation queue with scheduled delivery
+
+**🔗 Multi-Channel Integration Layer**
+- WhatsApp webhook receiver and test-send flows
+- Email channel with outbound queue support
+- CRM sync and integration health monitoring
+
+---
+
+## 🖥 Product Surfaces
 
 <table>
   <tr>
     <td width="60%">
-      <img src="docs/assets/dashboard-preview.svg" alt="Aurevia dashboard preview" width="100%" />
+      <img src="docs/assets/dashboard-preview.svg" alt="Command Center" width="100%" />
     </td>
-    <td width="40%">
-      <strong>Operations Command Center</strong><br />
-      A premium admin workspace for pipeline visibility, lead routing, escalations, analytics, and knowledge operations.
+    <td width="40%" valign="top">
+      <br />
+      <strong>Command Center</strong>
+      <br /><br />
+      Cinematic dark dashboard. Pipeline visibility, escalation routing, analytics, and RAG operations — from one premium workspace.
     </td>
   </tr>
   <tr>
     <td width="60%">
-      <img src="docs/assets/conversations-preview.svg" alt="Aurevia conversations preview" width="100%" />
+      <img src="docs/assets/conversations-preview.svg" alt="Conversation Engine" width="100%" />
     </td>
-    <td width="40%">
-      <strong>Conversation Intelligence Workspace</strong><br />
-      Structured thread review with lead context, intent handling, and automation-aware response flows.
+    <td width="40%" valign="top">
+      <br />
+      <strong>Conversation Engine</strong>
+      <br /><br />
+      Cross-channel thread review with intent context, AI response quality, and lead qualification state.
     </td>
   </tr>
 </table>
 
-The live product also includes a premium landing surface and floating AI chat experience aligned with the same dark luxury system.
+---
+
+## 🏗 Stack
+
+| Layer | Technology |
+|---|---|
+| **Frontend** | Next.js 14 · TypeScript · Tailwind CSS · App Router · Geist |
+| **Backend** | FastAPI · Pydantic v2 · SQLAlchemy 2 async · Alembic |
+| **AI** | GPT-4o · text-embedding-3-small · RAG orchestration |
+| **Data** | PostgreSQL 16 · Qdrant vector DB |
+| **Infra** | Docker Compose · Vercel · Render · Railway |
 
 ---
 
-## AI Workflow and Architecture
+## 🔁 Demo Mode
 
-```mermaid
-flowchart LR
-    A[Website Leads] --> D[Intake Layer]
-    B[WhatsApp Conversations] --> D
-    C[Email Inquiries] --> D
-
-    D --> E[Intent and Entity Extraction]
-    E --> F[AI Orchestrator]
-    F --> G[Search Properties Tool]
-    F --> H[Lead Creation Tool]
-    F --> I[Market Insights Tool]
-    F --> J[RAG Retrieval Layer]
-
-    J --> K[Qdrant Knowledge Index]
-    H --> L[PostgreSQL CRM State]
-    I --> L
-    G --> L
-
-    F --> M[Reply Generation]
-    F --> N[Follow-Up Automation]
-    F --> O[Escalation Logic]
-
-    M --> P[Frontend Dashboard]
-    N --> P
-    O --> P
-    L --> P
-```
-
-### Layer View
-
-| Layer | Role |
-| --- | --- |
-| **Inbound Layer** | Receives demand from website, WhatsApp, and email channels |
-| **AI Layer** | Extracts intent and entities, generates responses, and drives workflow decisions |
-| **Action Layer** | Searches properties, creates leads, triggers follow-ups, and escalates high-priority cases |
-| **Data Layer** | Stores operational CRM state in PostgreSQL and retrieval context in Qdrant |
-| **Presentation Layer** | Exposes the system through a polished Next.js dashboard and landing experience |
-
----
-
-## Tech Stack
-
-| Category | Technologies |
-| --- | --- |
-| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, App Router |
-| **Backend** | FastAPI, Pydantic, SQLAlchemy, Alembic |
-| **AI** | OpenAI GPT-4o, embeddings, prompt orchestration, retrieval-augmented generation |
-| **Data** | PostgreSQL, Qdrant, SQLite for selected portable deployment scenarios |
-| **Infrastructure** | Docker Compose, Vercel, Render, Railway, Hugging Face Spaces |
-
----
-
-## Demo and Deployment
-
-### Demo Mode
-
-The frontend supports a portfolio-safe runtime when live APIs are unavailable.
-
-`NEXT_PUBLIC_DEMO_MODE` options:
-
-- `off` - frontend uses only the live backend
-- `fallback` - live-first behavior with automatic demo fallback if the backend is unreachable
-- `force` - always runs on mock data for recruiter demos, walkthroughs, and portfolio reviews
-
-Example:
+The frontend ships with a **resilient demo runtime** — fully presentable without a live backend.
 
 ```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
-NEXT_PUBLIC_DEMO_MODE=fallback
+NEXT_PUBLIC_DEMO_MODE=force      # always demo data — recruiter/portfolio mode
+NEXT_PUBLIC_DEMO_MODE=fallback   # live-first, auto-falls back if backend is down
+NEXT_PUBLIC_DEMO_MODE=off        # live backend only
 ```
 
-### Deployment Notes
-
-- **Frontend** is prepared for deployment on Vercel from the `frontend` app directory
-- **Backend** can be deployed through Render or Railway using the included root deployment manifests
-- **Portable backend demos** can be adapted for Hugging Face Space deployment through the separate deployment repo workflow
-
-Important environment variables:
-
-- `NEXT_PUBLIC_API_BASE_URL`
-- `NEXT_PUBLIC_DEMO_MODE`
-- `DATABASE_URL`
-- `ALEMBIC_DATABASE_URL`
-- `QDRANT_URL`
-- `OPENAI_API_KEY`
-- `CORS_ORIGINS`
-
 ---
 
-## Portfolio Value
-
-This project is especially strong as a portfolio piece because it demonstrates:
-
-- **end-to-end product thinking** from UI system design to backend workflow orchestration
-- **AI application design** beyond a simple chatbot, including extraction, routing, retrieval, and escalation
-- **real SaaS presentation quality** with premium interface polish and demo resilience
-- **deployment awareness** across frontend, backend, and portable runtime targets
-- **clear domain framing** around real estate operations, lead qualification, and brokerage automation
-
----
-
-## Local Development
-
-### Clone and configure
+## 🚀 Quick Start
 
 ```bash
+# Clone
 git clone https://github.com/zohair-azmat-ai/Aurevia-Estate-Ai.git
 cd aurevia-estate-ai
+
+# Configure
 cp .env.example .env
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
-```
 
-### Run with Docker
-
-```bash
+# Run (Docker)
 docker compose up --build
 ```
 
-### Run manually
-
-Backend:
+**Manual:**
 
 ```bash
-cd backend
-pip install -r requirements.txt
+# Backend
+cd backend && pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
+
+# Frontend
+cd frontend && npm install && npm run dev
 ```
 
-Frontend:
+**Key environment variables:**
 
-```bash
-cd frontend
-npm install
-npm run dev
+```
+OPENAI_API_KEY · DATABASE_URL · QDRANT_URL
+NEXT_PUBLIC_API_BASE_URL · NEXT_PUBLIC_DEMO_MODE
 ```
 
 ---
 
-## Project Structure
+## 📁 Structure
 
-```text
+```
 aurevia-estate-ai/
-|-- backend/
-|-- frontend/
-|-- docs/
-|   `-- assets/
-|-- hf-space/
-|-- docker-compose.yml
-|-- render.yaml
-|-- railway.json
-|-- .env.example
-`-- README.md
+├── backend/          FastAPI · models · services · RAG · API
+├── frontend/         Next.js · dashboard · landing · components
+├── docs/             Architecture assets
+├── docker-compose.yml
+├── render.yaml
+└── railway.json
 ```
 
 ---
 
-## License
+## 💡 Why This Project
 
-[MIT](LICENSE)
+- End-to-end product thinking: UI system design → backend orchestration
+- AI application depth: extraction, routing, retrieval, escalation — not just chat
+- Production-shaped architecture: async ORM, Alembic migrations, vector DB, typed API client
+- Luxury SaaS interface quality with demo resilience built in
+- Clear domain framing: real estate operations, lead qualification, brokerage automation
+
+---
+
+<div align="center">
+
+**[MIT License](LICENSE)** · Built with precision for portfolio demonstration
+
+<img src="https://img.shields.io/badge/Aurevia%20Estate%20AI-Dark%20Luxury%20PropTech-C9A84C?style=for-the-badge" />
+
+</div>
