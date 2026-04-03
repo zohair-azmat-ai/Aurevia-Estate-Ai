@@ -14,8 +14,8 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
-import { PageContainer } from "../../components/dashboard/page-shell";
+import { EmptyState, ErrorState, ShimmerCard } from "../ui/data-states";
+import { PageContainer } from "../dashboard/page-shell";
 import { analyticsApi, conversationsApi, escalationsApi, followUpsApi, leadsApi } from "../../lib/api";
 import type { AnalyticsEvent, Conversation, Escalation, FollowUp, Lead, Message } from "../../lib/types";
 import { CHANNEL_CONFIG, STATUS_CONFIG, cn, formatBudget, formatDate, formatRelativeTime } from "../../lib/utils";

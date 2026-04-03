@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { BellRing, Bot, LockKeyhole, Save, Settings2, Sparkles } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
-import { PageContainer } from "../../components/dashboard/page-shell";
+import { EmptyState, ErrorState, ShimmerCard } from "../ui/data-states";
+import { PageContainer } from "../dashboard/page-shell";
 import { settingsApi } from "../../lib/api";
 import type { AppSettings } from "../../lib/types";
 

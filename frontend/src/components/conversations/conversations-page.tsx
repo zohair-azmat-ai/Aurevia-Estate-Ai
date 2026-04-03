@@ -11,8 +11,8 @@ import {
   ShieldAlert,
   Sparkles,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
-import { PageContainer } from "../../components/dashboard/page-shell";
+import { EmptyState, ErrorState, ShimmerCard } from "../ui/data-states";
+import { PageContainer } from "../dashboard/page-shell";
 import { conversationsApi, escalationsApi, followUpsApi, leadsApi } from "../../lib/api";
 import type { Conversation, Escalation, FollowUp, Lead, Message } from "../../lib/types";
 import { CHANNEL_CONFIG, cn, formatRelativeTime } from "../../lib/utils";

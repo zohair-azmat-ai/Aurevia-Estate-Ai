@@ -1,5 +1,5 @@
 import { ArrowUpRight, Layers3, Sparkles } from "lucide-react";
-import { PageContainer } from "../../components/dashboard/page-shell";
+import { PageContainer } from "./page-shell";
 
 type PlaceholderPageProps = {
   eyebrow: string;

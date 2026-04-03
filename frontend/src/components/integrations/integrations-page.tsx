@@ -10,8 +10,8 @@ import {
   Sparkles,
   TestTube2,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
-import { PageContainer } from "../../components/dashboard/page-shell";
+import { EmptyState, ErrorState, ShimmerCard } from "../ui/data-states";
+import { PageContainer } from "../dashboard/page-shell";
 import { integrationsApi } from "../../lib/api";
 import type { IntegrationProvider } from "../../lib/types";
 import { formatRelativeTime } from "../../lib/utils";
