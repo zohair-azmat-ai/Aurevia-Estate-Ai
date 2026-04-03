@@ -75,6 +75,8 @@ frontend/.next/
 frontend/out/
 .next/
 out/
+!frontend/src/lib/
+!frontend/src/lib/**
 
 # Vercel
 .vercel
