@@ -11,11 +11,9 @@ const STAT_PILLS = [
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden pt-[68px]">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#07080c_0%,#0b0e14_38%,#090b10_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_72%_52%_at_50%_-8%,rgba(201,168,76,0.18)_0%,transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(73,104,151,0.18),transparent_24%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_82%,rgba(201,168,76,0.07),transparent_24%)]" />
+    <section className="luxury-bg relative flex min-h-screen items-center overflow-hidden pt-[68px]">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,10,0.06)_0%,rgba(5,7,10,0.20)_32%,rgba(5,7,10,0.42)_100%)]" />
+      <div className="absolute inset-x-[10%] top-[12%] h-[360px] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.11)_0%,transparent_68%)] blur-3xl" />
       <div className="absolute inset-x-0 top-[18%] h-[420px] bg-[linear-gradient(180deg,rgba(255,255,255,0.035),transparent)]" />
       <div className="absolute inset-x-0 bottom-0 h-[360px] bg-[radial-gradient(circle_at_center_bottom,rgba(240,182,87,0.09),transparent_52%)]" />
 
