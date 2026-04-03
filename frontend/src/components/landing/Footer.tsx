@@ -75,12 +75,12 @@ export default function Footer() {
                         {link.label} →
                       </a>
                     ) : (
-                      <a
+                      <Link
                         href={link.href}
                         className="text-sm text-content-secondary transition-colors duration-200 hover:text-content-primary"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     )}
                   </li>
                 ))}

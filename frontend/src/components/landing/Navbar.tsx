@@ -34,7 +34,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
 
         {/* ── Logo ── */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 group">
           <div className="relative w-9 h-9 rounded-xl bg-brand-gold-subtle border border-brand-gold/25 flex items-center justify-center group-hover:border-brand-gold/50 group-hover:shadow-gold-sm transition-all duration-300">
             <span className="text-brand-gold font-bold text-base tracking-tight">A</span>
           </div>
