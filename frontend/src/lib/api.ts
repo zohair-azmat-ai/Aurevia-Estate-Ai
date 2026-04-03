@@ -15,6 +15,8 @@ import type {
   ApiErrorShape,
   AppSettings,
   AutomationSettings,
+  ChatRequest,
+  ChatResponse,
   Conversation,
   Escalation,
   FollowUp,
@@ -332,6 +334,14 @@ export const healthApi = {
     resolveData(
       () => unwrap<{ status: string; service: string; version: string }>(client.get("/health")),
       () => demoApi.health.check(),
+    ),
+};
+
+export const chatApi = {
+  send: (payload: ChatRequest) =>
+    resolveData(
+      () => unwrap<ChatResponse>(client.post("/chat", payload)),
+      () => demoApi.chat.send(payload),
     ),
 };
 

@@ -6,6 +6,8 @@ import type {
   AnalyticsEvent,
   AnalyticsSummary,
   AppSettings,
+  ChatRequest,
+  ChatResponse,
   Conversation,
   Escalation,
   FollowUp,
@@ -76,6 +78,59 @@ function slugify(value: string) {
 
 function minutesAgo(value: number) {
   return new Date(Date.now() - value * 60_000).toISOString();
+}
+
+function extractChatCriteria(message: string) {
+  const text = message.toLowerCase();
+  const budgetMillion = text.match(/(\d+(?:\.\d+)?)\s*m\b/);
+  const budgetK = text.match(/(\d+(?:\.\d+)?)\s*k\b/);
+  const rawBudget = text.match(/\b(\d{5,8})\b/);
+  const location =
+    text.includes("dubai marina")
+      ? "Dubai Marina"
+      : text.includes("jvc")
+        ? "JVC"
+        : text.includes("palm jumeirah")
+          ? "Palm Jumeirah"
+          : text.includes("downtown")
+            ? "Downtown Dubai"
+            : null;
+  const propertyType = text.includes("studio")
+    ? "studio"
+    : text.includes("1 bhk") || text.includes("1bhk")
+      ? "1bhk"
+      : text.includes("2 bhk") || text.includes("2bhk")
+        ? "2bhk"
+        : text.includes("villa")
+          ? "villa"
+          : text.includes("townhouse")
+            ? "townhouse"
+            : text.includes("apartment")
+              ? "apartment"
+              : null;
+  const intent = text.includes("buy") || text.includes("purchase") || text.includes("invest")
+    ? "buy"
+    : text.includes("rent") || text.includes("lease")
+      ? "rent"
+      : null;
+  const budget = budgetMillion
+    ? Math.round(Number(budgetMillion[1]) * 1_000_000)
+    : budgetK
+      ? Math.round(Number(budgetK[1]) * 1_000)
+      : rawBudget
+        ? Number(rawBudget[1])
+        : null;
+  const bedrooms = propertyType === "studio" ? 0 : propertyType === "1bhk" ? 1 : propertyType === "2bhk" ? 2 : null;
+  const highPriority = Boolean((budget && budget > 1_000_000) || intent === "buy");
+
+  return {
+    intent,
+    property_type: propertyType,
+    location,
+    budget,
+    bedrooms,
+    high_priority: highPriority,
+  };
 }
 
 let leadStore: Lead[] = leadRecords.map((record) => ({
@@ -595,5 +650,54 @@ export const demoApi = {
         service: "aurevia-demo-runtime",
         version: "demo-1.0",
       }),
+  },
+  chat: {
+    send: async (payload: ChatRequest) => {
+      const extracted = extractChatCriteria(payload.message);
+      const suggestions = [
+        {
+          id: "demo-chat-1",
+          title:
+            extracted.location === "Palm Jumeirah"
+              ? "Palm Jumeirah Signature Villa"
+              : extracted.location === "JVC"
+                ? "JVC One-Bedroom Lifestyle Apartment"
+                : "Dubai Marina 1BR Executive Apartment",
+          location: extracted.location ?? "Dubai Marina",
+          property_type: extracted.property_type ?? "apartment",
+          transaction_type: extracted.intent ?? "rent",
+          price_aed:
+            extracted.location === "Palm Jumeirah"
+              ? 24_000_000
+              : extracted.location === "JVC"
+                ? 74_000
+                : 92_000,
+          bedrooms: extracted.bedrooms ?? 1,
+          bathrooms: extracted.location === "Palm Jumeirah" ? 6 : 2,
+          area_sqft: extracted.location === "Palm Jumeirah" ? 7200 : 812,
+          summary: "Matched from Aurevia's premium demo inventory based on the brief.",
+          match_reason: "Aligned with the stated brief and demo inventory filters.",
+        },
+      ];
+
+      return withLatency<ChatResponse>({
+        reply:
+          "I've understood your brief and shortlisted a relevant option. If you'd like, I can now refine this into the strongest shortlist and prepare an agent handoff.",
+        suggestions,
+        extracted,
+        market_insight: extracted.location
+          ? {
+              location: extracted.location,
+              average_rent_aed: extracted.location === "Palm Jumeirah" ? 420000 : 88000,
+              average_sale_price_aed: extracted.location === "Palm Jumeirah" ? 17500000 : 1850000,
+              trend: extracted.location === "JVC" ? "Upward" : "Stable-to-up",
+              insight: "Demo market insight: this area is performing well for premium buyer and tenant demand.",
+            }
+          : null,
+        lead_id: extracted.budget && extracted.location && extracted.property_type ? `chat-demo-${Date.now()}` : null,
+        lead_created: Boolean(extracted.budget && extracted.location && extracted.property_type),
+        high_priority: extracted.high_priority,
+      });
+    },
   },
 };

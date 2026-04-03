@@ -253,6 +253,52 @@ export interface ApiErrorShape {
   status?: number;
 }
 
+export interface ChatRequest {
+  message: string;
+  user_id?: string;
+}
+
+export interface PropertySuggestion {
+  id: string;
+  title: string;
+  location: string;
+  property_type: string;
+  transaction_type: string;
+  price_aed: number;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  area_sqft: number | null;
+  summary: string;
+  match_reason: string;
+}
+
+export interface MarketInsight {
+  location: string;
+  average_rent_aed: number | null;
+  average_sale_price_aed: number | null;
+  trend: string;
+  insight: string;
+}
+
+export interface ExtractedCriteria {
+  intent: string | null;
+  property_type: string | null;
+  location: string | null;
+  budget: number | null;
+  bedrooms: number | null;
+  high_priority: boolean;
+}
+
+export interface ChatResponse {
+  reply: string;
+  suggestions: PropertySuggestion[];
+  extracted: ExtractedCriteria;
+  market_insight: MarketInsight | null;
+  lead_id: string | null;
+  lead_created: boolean;
+  high_priority: boolean;
+}
+
 export interface IntegrationProvider {
   provider: string;
   display_name: string;
