@@ -1,0 +1,16 @@
+<svg width="840" height="240" viewBox="0 0 840 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="840" height="240" rx="36" fill="#0A0A0F"/>
+  <rect x="24" y="24" width="792" height="192" rx="28" fill="#101017" stroke="#29231A"/>
+  <rect x="72" y="62" width="116" height="116" rx="28" fill="#17151A" stroke="#3B3120"/>
+  <path d="M130 86L158 108V152H144V126H116V152H102V108L130 86Z" fill="url(#paint0_linear_1_3)"/>
+  <text x="242" y="96" fill="#F0EDE8" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.8">Aurevia Estate AI</text>
+  <text x="242" y="140" fill="#C9A84C" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="4.8">INTELLIGENT CONVERSATIONS • QUALIFIED LEADS • CLOSED DEALS</text>
+  <text x="242" y="191" fill="#9896A4" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500">Premium real estate lead automation for modern brokerages and PropTech teams.</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_3" x1="102" y1="86" x2="158" y2="152" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0D886"/>
+      <stop offset="0.5" stop-color="#C9A84C"/>
+      <stop offset="1" stop-color="#836826"/>
+    </linearGradient>
+  </defs>
+</svg>

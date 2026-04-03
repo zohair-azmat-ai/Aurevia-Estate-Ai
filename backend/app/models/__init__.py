@@ -1,0 +1,9 @@
+from app.models.app_setting import AppSetting  # noqa: F401
+from app.models.conversation import Conversation  # noqa: F401
+from app.models.escalation import Escalation  # noqa: F401
+from app.models.event import Event  # noqa: F401
+from app.models.follow_up import FollowUp  # noqa: F401
+from app.models.integration_connection import IntegrationConnection  # noqa: F401
+from app.models.knowledge import KnowledgeDocument  # noqa: F401
+from app.models.lead import Lead  # noqa: F401
+from app.models.message import Message  # noqa: F401

@@ -1,0 +1,186 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  BarChart3,
+  BellRing,
+  BookOpen,
+  Bot,
+  ChevronRight,
+  Inbox,
+  LayoutDashboard,
+  Link2,
+  MessageSquareText,
+  Settings,
+  ShieldAlert,
+  Sparkles,
+  UsersRound,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+export type DashboardNavItem = {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+};
+
+export const dashboardNavItems: DashboardNavItem[] = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/leads", label: "Leads", icon: UsersRound, badge: "24" },
+  { href: "/conversations", label: "Conversations", icon: MessageSquareText, badge: "8" },
+  { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/follow-ups", label: "Follow-Ups", icon: BellRing, badge: "12" },
+  { href: "/escalations", label: "Escalations", icon: ShieldAlert, badge: "3" },
+  { href: "/knowledge", label: "Knowledge", icon: BookOpen },
+  { href: "/integrations", label: "Integrations", icon: Link2 },
+  { href: "/settings", label: "Settings", icon: Settings },
+];
+
+const sidebarHighlights = [
+  {
+    label: "AI command center",
+    value: "94.8%",
+    description: "Reply precision across WhatsApp, web, and email.",
+  },
+  {
+    label: "Escalation control",
+    value: "11 min",
+    description: "Median handoff time for high-intent opportunities.",
+  },
+];
+
+type DashboardSidebarProps = {
+  onNavigate?: () => void;
+};
+
+export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
+  const pathname = usePathname();
+
+  return (
+    <aside className="flex h-full w-full flex-col overflow-hidden border-r border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_24%),linear-gradient(180deg,#111118_0%,#0b0b10_100%)]">
+      <div className="border-b border-white/8 px-5 py-5">
+        <Link href="/dashboard" className="group flex items-start gap-3" onClick={onNavigate}>
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/25 bg-brand-gold/10 shadow-gold-sm">
+            <Bot className="h-5 w-5 text-brand-gold" />
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold/80">
+                Aurevia
+              </span>
+              <Sparkles className="h-3.5 w-3.5 text-brand-gold" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-content-primary">Estate AI Console</p>
+              <p className="text-xs text-content-secondary">
+                Luxury operations intelligence
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-5">
+        <div className="mb-5 rounded-3xl border border-brand-gold/15 bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.16),rgba(201,168,76,0.03)_38%,rgba(255,255,255,0.02)_100%)] p-4 shadow-gold-sm">
+          <p className="label-caps text-brand-gold/75">Portfolio command layer</p>
+          <h2 className="mt-3 text-lg font-semibold text-content-primary">
+            Premium automation stack for elite broker teams.
+          </h2>
+          <p className="mt-2 text-sm text-content-secondary">
+            Routing every opportunity through qualification, follow-up, and handoff with calm precision.
+          </p>
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/5 px-3 py-1.5 text-xs text-content-primary">
+            <span className="h-2 w-2 rounded-full bg-status-green" />
+            All systems synced
+          </div>
+        </div>
+
+        <nav className="space-y-1.5">
+          {dashboardNavItems.map((item) => {
+            const active = pathname === item.href;
+            const Icon = item.icon;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onNavigate}
+                className={cn(
+                  "group flex items-center gap-3 rounded-2xl border px-3.5 py-3 text-sm transition-all duration-200",
+                  active
+                    ? "border-brand-gold/25 bg-brand-gold/10 text-brand-gold shadow-gold-sm"
+                    : "border-transparent text-content-secondary hover:border-white/8 hover:bg-white/4 hover:text-content-primary"
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-xl border transition-colors",
+                    active
+                      ? "border-brand-gold/20 bg-brand-gold/10 text-brand-gold"
+                      : "border-white/6 bg-white/4 text-content-secondary group-hover:text-content-primary"
+                  )}
+                >
+                  <Icon className="h-4.5 w-4.5" />
+                </span>
+                <span className="flex-1 font-medium">{item.label}</span>
+                {item.badge ? (
+                  <span
+                    className={cn(
+                      "rounded-full px-2 py-0.5 text-xs",
+                      active
+                        ? "bg-brand-gold/15 text-brand-gold"
+                        : "bg-white/6 text-content-secondary"
+                    )}
+                  >
+                    {item.badge}
+                  </span>
+                ) : (
+                  <ChevronRight
+                    className={cn(
+                      "h-4 w-4 transition-transform",
+                      active ? "text-brand-gold" : "text-content-muted group-hover:translate-x-0.5"
+                    )}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
+      <div className="border-t border-white/8 p-4">
+        <div className="rounded-3xl border border-white/8 bg-white/4 p-4">
+          <div className="mb-4 flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border border-status-blue/20 bg-status-blue/10 text-status-blue">
+              <Inbox className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-content-primary">Executive signal</p>
+              <p className="text-xs text-content-secondary">Today&apos;s operational snapshot</p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {sidebarHighlights.map((highlight) => (
+              <div
+                key={highlight.label}
+                className="rounded-2xl border border-white/6 bg-surface-base/70 p-3"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-content-muted">
+                    {highlight.label}
+                  </p>
+                  <p className="text-sm font-semibold text-content-primary">{highlight.value}</p>
+                </div>
+                <p className="mt-2 text-xs leading-5 text-content-secondary">
+                  {highlight.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+}
