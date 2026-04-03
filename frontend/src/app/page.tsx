@@ -23,10 +23,53 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="landing-luxury-bg min-h-screen text-content-primary">
+    <div className="landing-luxury-bg relative min-h-screen text-content-primary">
+
+      {/* ── Cinematic atmospheric layers ── */}
+
+      {/* Fixed top-center gold corona */}
+      <div
+        className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[480px]"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 110% 100% at 50% -5%, rgba(214,174,83,0.20) 0%, rgba(201,168,76,0.07) 40%, transparent 68%)",
+        }}
+      />
+
+      {/* Top edge highlight beam */}
+      <div
+        className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[1px] opacity-50"
+        aria-hidden
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 5%, rgba(201,168,76,0.35) 30%, rgba(255,255,255,0.22) 50%, rgba(201,168,76,0.35) 70%, transparent 95%)",
+        }}
+      />
+
+      {/* Side accent glows */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(circle at 92% 10%, rgba(56,88,154,0.16), transparent 20%), radial-gradient(circle at 8% 86%, rgba(201,168,76,0.08), transparent 24%)",
+        }}
+      />
+
+      {/* Vignette */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 85% 85% at 50% 50%, transparent 50%, rgba(3,4,8,0.48) 100%)",
+        }}
+      />
+
       <Navbar />
-      <main className="relative">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(circle_at_50%_0%,rgba(201,168,76,0.14),transparent_42%)]" />
+
+      <main className="relative z-10">
         <Hero />
         <div className="landing-section-wash">
           <TrustBar />

@@ -82,19 +82,57 @@ export function DashboardShell({ children }: DashboardShellProps) {
   }, [pathname]);
 
   return (
-    <div className="dashboard-premium-bg min-h-screen text-content-primary">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.12),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(68,103,156,0.14),transparent_18%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_16%)]" />
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-[280px] bg-[linear-gradient(180deg,rgba(255,255,255,0.035),transparent_55%)]" />
+    <div className="dashboard-premium-bg relative min-h-screen text-content-primary">
 
-      <div className="relative flex min-h-screen">
+      {/* ── Atmospheric background layers ── */}
+
+      {/* Noise texture grain */}
+      <div className="dashboard-noise-overlay" aria-hidden />
+
+      {/* Vignette edge darkening */}
+      <div className="dashboard-vignette" aria-hidden />
+
+      {/* Top gold corona — fixed, always visible */}
+      <div
+        className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[340px]"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 100% 100% at 50% 0%, rgba(214,174,83,0.18) 0%, rgba(201,168,76,0.06) 38%, transparent 68%)",
+        }}
+      />
+
+      {/* Side accent glows */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(circle at 90% 12%, rgba(60,90,160,0.16), transparent 22%), radial-gradient(circle at 5% 88%, rgba(201,168,76,0.09), transparent 26%)",
+        }}
+      />
+
+      {/* Top edge highlight beam */}
+      <div
+        className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[1px]"
+        aria-hidden
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.28) 30%, rgba(255,255,255,0.22) 50%, rgba(201,168,76,0.28) 70%, transparent 100%)",
+        }}
+      />
+
+      <div className="relative z-10 flex min-h-screen">
+        {/* ── Sidebar (desktop) ── */}
         <div className="hidden xl:fixed xl:inset-y-0 xl:flex xl:w-[310px] xl:flex-col">
           <DashboardSidebar />
         </div>
 
+        {/* ── Sidebar (mobile drawer) ── */}
         <Dialog.Root open={sidebarOpen} onOpenChange={setSidebarOpen}>
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm xl:hidden" />
-            <Dialog.Content className="fixed inset-y-0 left-0 z-50 w-[88vw] max-w-[320px] border-r border-white/10 bg-surface-elevated xl:hidden">
+            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/75 backdrop-blur-sm xl:hidden" />
+            <Dialog.Content className="fixed inset-y-0 left-0 z-50 w-[88vw] max-w-[320px] border-r border-white/10 bg-[#0a0c13] xl:hidden">
               <Dialog.Title className="sr-only">Navigation</Dialog.Title>
               <DashboardSidebar onNavigate={() => setSidebarOpen(false)} />
               <Dialog.Close className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/30 text-content-secondary transition hover:text-content-primary">
@@ -105,7 +143,17 @@ export function DashboardShell({ children }: DashboardShellProps) {
         </Dialog.Root>
 
         <div className="flex min-h-screen w-full flex-col xl:pl-[310px]">
-          <header className="sticky top-0 z-30 border-b border-white/8 bg-[linear-gradient(180deg,rgba(7,9,13,0.92),rgba(8,10,14,0.82))] backdrop-blur-2xl">
+          {/* ── Header ── */}
+          <header className="sticky top-0 z-30 border-b border-white/[0.07] bg-[linear-gradient(180deg,rgba(6,7,13,0.94),rgba(7,9,14,0.84))] backdrop-blur-[28px]">
+            {/* Subtle top-of-header glow line */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-[1px] opacity-60"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(201,168,76,0.30) 30%, rgba(255,255,255,0.18) 50%, rgba(201,168,76,0.30) 70%, transparent)",
+              }}
+            />
+
             <div className="mx-auto flex w-full max-w-[1600px] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
               <button
                 type="button"
@@ -151,6 +199,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 </div>
               </div>
 
+              {/* Search */}
               <div className="hidden min-w-[280px] max-w-[360px] flex-1 xl:block">
                 <label className="glass flex h-12 items-center gap-3 rounded-[20px] px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
                   <Search className="h-4.5 w-4.5 text-brand-gold" />
@@ -162,10 +211,11 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 </label>
               </div>
 
+              {/* Right actions */}
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  title="Notifications and product health"
+                  title="Notifications"
                   className="glass relative inline-flex h-12 w-12 items-center justify-center rounded-[20px] text-content-secondary transition hover:border-brand-gold/25 hover:text-content-primary"
                   aria-label="Notifications"
                 >
@@ -188,6 +238,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               </div>
             </div>
 
+            {/* Mobile search */}
             <div className="border-t border-white/6 px-4 py-3 sm:px-6 xl:hidden">
               <label className="glass mx-auto flex w-full max-w-[1600px] items-center gap-3 rounded-[20px] px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
                 <Search className="h-4.5 w-4.5 text-brand-gold" />
@@ -200,10 +251,16 @@ export function DashboardShell({ children }: DashboardShellProps) {
             </div>
           </header>
 
+          {/* ── Main content ── */}
           <main className="relative flex-1">
             <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+              {/* Triple-border premium frame */}
               <div className="dashboard-frame-outer p-3 sm:p-4 lg:p-5">
-                <div className={cn("dashboard-frame-inner p-4 transition-all duration-300 motion-safe:animate-[fadeIn_420ms_ease] sm:p-6 lg:p-7")}>
+                <div
+                  className={cn(
+                    "dashboard-frame-inner p-4 transition-all duration-300 motion-safe:animate-[fadeIn_420ms_ease] sm:p-6 lg:p-7"
+                  )}
+                >
                   {children}
                 </div>
               </div>
@@ -233,7 +290,7 @@ export function PageContainer({
   return (
     <div className="space-y-6 lg:space-y-8">
       {title || description || eyebrow || actions ? (
-        <section className="flex flex-col gap-4 rounded-[28px] border border-white/8 bg-[linear-gradient(135deg,rgba(201,168,76,0.08),rgba(255,255,255,0.025)_38%,rgba(59,130,246,0.04)_100%)] p-6 lg:flex-row lg:items-end lg:justify-between lg:p-7">
+        <section className="flex flex-col gap-4 rounded-[28px] border border-white/8 bg-[linear-gradient(135deg,rgba(201,168,76,0.09),rgba(255,255,255,0.025)_38%,rgba(59,130,246,0.04)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_24px_60px_rgba(0,0,0,0.18)] lg:flex-row lg:items-end lg:justify-between lg:p-7">
           <div className="max-w-3xl">
             {eyebrow ? <p className="label-caps mb-3 text-brand-gold/80">{eyebrow}</p> : null}
             {title ? (

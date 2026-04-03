@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  ArrowLeft,
   BarChart3,
   BellRing,
   BookOpen,
   Bot,
   ChevronRight,
+  ExternalLink,
   Inbox,
   LayoutDashboard,
   Link2,
@@ -59,31 +61,44 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-full w-full flex-col overflow-hidden border-r border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01)_16%,rgba(0,0,0,0)_24%),linear-gradient(180deg,#0d1118_0%,#090c12_100%)]">
-      <div className="border-b border-white/8 px-5 py-5">
+    <aside className="flex h-full w-full flex-col overflow-hidden border-r border-white/[0.07] bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)_14%,rgba(0,0,0,0)_22%),linear-gradient(180deg,#0b0e17_0%,#080b12_100%)]">
+
+      {/* ── Logo / Brand header ── */}
+      <div className="border-b border-white/[0.07] px-5 py-5">
         <Link href="/dashboard" className="group flex items-start gap-3" onClick={onNavigate}>
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/25 bg-[linear-gradient(180deg,rgba(201,168,76,0.16),rgba(201,168,76,0.08))] shadow-gold-sm">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/28 bg-[linear-gradient(180deg,rgba(201,168,76,0.18),rgba(201,168,76,0.09))] shadow-[0_0_20px_rgba(201,168,76,0.10)]">
             <Bot className="h-5 w-5 text-brand-gold" />
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold/80">
+              <span className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold/85">
                 Aurevia
               </span>
               <Sparkles className="h-3.5 w-3.5 text-brand-gold" />
             </div>
             <div>
               <p className="text-sm font-semibold text-content-primary">Estate AI Console</p>
-              <p className="text-xs text-content-secondary">
-                Luxury operations intelligence
-              </p>
+              <p className="text-xs text-content-secondary">Luxury operations intelligence</p>
             </div>
           </div>
         </Link>
+
+        {/* Back to site link */}
+        <Link
+          href="/"
+          onClick={onNavigate}
+          className="mt-4 flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2 text-xs text-content-muted transition hover:border-brand-gold/20 hover:bg-brand-gold/8 hover:text-brand-gold/80 group"
+        >
+          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <span>Back to site</span>
+          <ExternalLink className="ml-auto h-3 w-3 opacity-40" />
+        </Link>
       </div>
 
+      {/* ── Nav items ── */}
       <div className="flex-1 overflow-y-auto px-4 py-5">
-        <div className="mb-5 rounded-[28px] border border-brand-gold/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)),radial-gradient(circle_at_top,rgba(201,168,76,0.18),rgba(201,168,76,0.05)_42%,rgba(8,10,14,0.98)_100%)] p-4 shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
+        {/* Command card */}
+        <div className="mb-5 rounded-[28px] border border-brand-gold/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)),radial-gradient(circle_at_top,rgba(201,168,76,0.20),rgba(201,168,76,0.05)_42%,rgba(7,9,13,0.98)_100%)] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.06)]">
           <p className="label-caps text-brand-gold/75">Portfolio command layer</p>
           <h2 className="mt-3 text-lg font-semibold text-content-primary">
             Premium automation stack for elite broker teams.
@@ -92,12 +107,12 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
             Routing every opportunity through qualification, follow-up, and handoff with calm precision.
           </p>
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/5 px-3 py-1.5 text-xs text-content-primary">
-            <span className="h-2 w-2 rounded-full bg-status-green" />
+            <span className="h-2 w-2 rounded-full bg-status-green shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
             All systems synced
           </div>
         </div>
 
-        <nav className="space-y-2">
+        <nav className="space-y-1.5">
           {dashboardNavItems.map((item) => {
             const active = pathname === item.href;
             const Icon = item.icon;
@@ -110,7 +125,7 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
                 className={cn(
                   "group flex items-center gap-3 rounded-[20px] border px-3.5 py-3 text-sm transition-all duration-200",
                   active
-                    ? "border-brand-gold/22 bg-[linear-gradient(180deg,rgba(201,168,76,0.16),rgba(201,168,76,0.08))] text-brand-gold shadow-[0_0_0_1px_rgba(201,168,76,0.04),0_20px_60px_rgba(0,0,0,0.22)]"
+                    ? "border-brand-gold/24 bg-[linear-gradient(180deg,rgba(201,168,76,0.17),rgba(201,168,76,0.09))] text-brand-gold shadow-[0_0_0_1px_rgba(201,168,76,0.05),0_20px_60px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.06)]"
                     : "border-white/[0.03] bg-white/[0.015] text-content-secondary hover:border-white/8 hover:bg-white/[0.04] hover:text-content-primary"
                 )}
               >
@@ -118,7 +133,7 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
                   className={cn(
                     "flex h-10 w-10 items-center justify-center rounded-xl border transition-colors",
                     active
-                      ? "border-brand-gold/20 bg-brand-gold/10 text-brand-gold"
+                      ? "border-brand-gold/22 bg-brand-gold/12 text-brand-gold"
                       : "border-white/6 bg-white/[0.03] text-content-secondary group-hover:text-content-primary"
                   )}
                 >
@@ -130,7 +145,7 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
                     className={cn(
                       "rounded-full px-2 py-0.5 text-xs",
                       active
-                        ? "bg-brand-gold/15 text-brand-gold"
+                        ? "bg-brand-gold/16 text-brand-gold"
                         : "bg-white/6 text-content-secondary"
                     )}
                   >
@@ -150,8 +165,9 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
         </nav>
       </div>
 
-      <div className="border-t border-white/8 p-4">
-        <div className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.24)]">
+      {/* ── Bottom highlights panel ── */}
+      <div className="border-t border-white/[0.07] p-4">
+        <div className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.05)]">
           <div className="mb-4 flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-full border border-status-blue/20 bg-status-blue/10 text-status-blue">
               <Inbox className="h-4 w-4" />
@@ -165,7 +181,7 @@ export function DashboardSidebar({ onNavigate }: DashboardSidebarProps) {
             {sidebarHighlights.map((highlight) => (
               <div
                 key={highlight.label}
-                className="rounded-[20px] border border-white/6 bg-surface-base/72 p-3"
+                className="rounded-[20px] border border-white/6 bg-black/28 p-3"
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs uppercase tracking-[0.2em] text-content-muted">
