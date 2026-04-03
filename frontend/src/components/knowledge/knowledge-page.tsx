@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   AlertCircle,
   BookOpen,
+  Building2,
   CheckCircle2,
   ChevronRight,
   Clock,
@@ -11,6 +12,7 @@ import {
   FileText,
   Filter,
   Layers,
+  MapPinned,
   RefreshCw,
   Search,
   Trash2,
@@ -51,6 +53,67 @@ const CATEGORIES = [
 ];
 
 const UPLOAD_CATEGORIES = CATEGORIES.filter((c) => c.value !== "all");
+
+function svgDataUrl(svg: string) {
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+function documentPreviewStyle(category: string, title: string): CSSProperties {
+  const palettes: Record<string, { sky: string; glow: string; accent: string }> = {
+    faq: { sky: "#0d1525", glow: "#d1ab52", accent: "#f3d98d" },
+    area_guide: { sky: "#0e1f2d", glow: "#d3a55c", accent: "#87c8f2" },
+    brochure: { sky: "#120f19", glow: "#cb9d49", accent: "#f1d48e" },
+    property_brochure: { sky: "#101520", glow: "#cfa24f", accent: "#d9b36a" },
+    pricing: { sky: "#14111a", glow: "#d2a95d", accent: "#f2dec3" },
+    rental_rules: { sky: "#0d1822", glow: "#caa04c", accent: "#9fd0ff" },
+    policy: { sky: "#0f1218", glow: "#c89d49", accent: "#b3c4db" },
+    other: { sky: "#12131b", glow: "#caa451", accent: "#d6d6de" },
+  };
+
+  const palette = palettes[category] ?? palettes.other;
+  const skyline = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 220'>
+    <defs>
+      <linearGradient id='g' x1='0' x2='0' y1='0' y2='1'>
+        <stop offset='0%' stop-color='${palette.sky}'/>
+        <stop offset='55%' stop-color='#0a0b11'/>
+        <stop offset='100%' stop-color='#050608'/>
+      </linearGradient>
+      <radialGradient id='sun' cx='68%' cy='26%' r='40%'>
+        <stop offset='0%' stop-color='${palette.glow}' stop-opacity='0.85'/>
+        <stop offset='35%' stop-color='${palette.glow}' stop-opacity='0.28'/>
+        <stop offset='100%' stop-color='${palette.glow}' stop-opacity='0'/>
+      </radialGradient>
+    </defs>
+    <rect width='320' height='220' fill='url(#g)'/>
+    <rect width='320' height='220' fill='url(#sun)'/>
+    <path d='M0 162h24v-28h14V92h18v70h12v-46h17v46h10V78h21v84h11v-34h16v34h15v-54h18v54h13v-81h20v81h13v-42h16v42h13v-58h19v58h15v-25h14v25h19v58H0z' fill='rgba(7,8,12,0.92)'/>
+    <path d='M232 44 220 162h34L242 44z' fill='rgba(10,11,17,0.95)'/>
+    <path d='M244 27 239 44h10z' fill='${palette.accent}' fill-opacity='0.82'/>
+    <path d='M132 66 121 162h32L142 66z' fill='rgba(10,11,17,0.94)'/>
+    <path d='M148 84 144 104h8z' fill='${palette.accent}' fill-opacity='0.68'/>
+    <g fill='${palette.accent}' fill-opacity='0.55'>
+      <rect x='33' y='116' width='4' height='5' rx='1'/>
+      <rect x='75' y='126' width='4' height='5' rx='1'/>
+      <rect x='98' y='97' width='4' height='5' rx='1'/>
+      <rect x='171' y='122' width='4' height='5' rx='1'/>
+      <rect x='186' y='112' width='4' height='5' rx='1'/>
+      <rect x='267' y='126' width='4' height='5' rx='1'/>
+      <rect x='286' y='138' width='4' height='5' rx='1'/>
+    </g>
+  </svg>`;
+
+  return {
+    backgroundImage: `
+      linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.02) 36%, rgba(0,0,0,0.1)),
+      radial-gradient(circle at 78% 18%, rgba(201,168,76,0.34), transparent 36%),
+      radial-gradient(circle at 18% 100%, rgba(255,255,255,0.14), transparent 42%),
+      ${svgDataUrl(skyline)}
+    `,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 22px 60px rgba(0,0,0,0.32)",
+  };
+}
 
 function formatBytes(bytes: number | null): string {
   if (!bytes) return "—";
@@ -364,11 +427,11 @@ interface DocCardProps {
 }
 
 function DocCard({ doc, selected, onSelect, onAction, busyAction }: DocCardProps) {
-  const tone = statusTone(doc.status);
   const canIndex = doc.status === "uploaded" || doc.status === "pending";
   const canReindex = doc.status === "indexed";
   const canRetry = doc.status === "failed";
   const canDelete = doc.status !== "archived";
+  const previewStyle = documentPreviewStyle(doc.category, doc.title);
 
   return (
     <div
@@ -618,6 +681,282 @@ function DetailPanel({ doc, busyAction, onAction }: DetailPanelProps) {
   );
 }
 
+function KnowledgeRowCard({ doc, selected, onSelect, onAction, busyAction }: DocCardProps) {
+  const canIndex = doc.status === "uploaded" || doc.status === "pending";
+  const canReindex = doc.status === "indexed";
+  const canRetry = doc.status === "failed";
+  const canDelete = doc.status !== "archived";
+  const previewStyle = documentPreviewStyle(doc.category, doc.title);
+
+  return (
+    <div
+      onClick={onSelect}
+      className={`group relative cursor-pointer overflow-hidden rounded-[28px] border p-3 transition duration-300 ${
+        selected
+          ? "border-brand-gold/35 bg-[linear-gradient(135deg,rgba(201,168,76,0.16),rgba(255,255,255,0.05)_38%,rgba(9,10,15,0.95))] shadow-[0_0_0_1px_rgba(201,168,76,0.16),0_34px_100px_rgba(0,0,0,0.44)]"
+          : "border-white/8 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02)_34%,rgba(7,8,12,0.94))] hover:-translate-y-0.5 hover:border-brand-gold/20 hover:shadow-[0_24px_80px_rgba(0,0,0,0.34)]"
+      }`}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.16),transparent_30%),radial-gradient(circle_at_left_bottom,rgba(255,255,255,0.08),transparent_34%)] opacity-90" />
+      <div className="relative grid gap-4 xl:grid-cols-[138px_minmax(0,1.4fr)_0.92fr]">
+        <div
+          className="relative h-[98px] overflow-hidden rounded-[22px] border border-white/10"
+          style={previewStyle}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,12,0.02),rgba(8,8,12,0.42)_65%,rgba(8,8,12,0.9))]" />
+          <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 pb-2">
+            <span className="rounded-full border border-white/12 bg-black/35 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-brand-gold/90 backdrop-blur-md">
+              Skyline
+            </span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/12 bg-white/10 text-brand-gold backdrop-blur-md">
+              <Building2 className="h-4 w-4" />
+            </div>
+          </div>
+        </div>
+
+        <div className="min-w-0">
+          <div className="flex items-start gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <p className="truncate text-[15px] font-semibold tracking-[-0.03em] text-content-primary">
+                  {doc.title}
+                </p>
+                {selected ? <ChevronRight className="h-3.5 w-3.5 shrink-0 text-brand-gold" /> : null}
+              </div>
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[10px] uppercase tracking-[0.22em] text-content-muted">
+                  {CATEGORY_LABELS[doc.category] ?? doc.category}
+                </span>
+                {doc.file_type ? (
+                  <span className="rounded-full border border-brand-gold/15 bg-brand-gold/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.22em] text-brand-gold/90">
+                    .{doc.file_type}
+                  </span>
+                ) : null}
+                <StatusBadge status={doc.status} />
+              </div>
+              <p className="mt-3 truncate text-sm text-content-secondary">
+                {doc.filename || "Premium real estate knowledge asset"}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <div className="rounded-[18px] border border-white/8 bg-black/20 px-3 py-2.5">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">Chunks</p>
+              <p className="mt-1 text-sm font-semibold text-content-primary">{doc.chunk_count || "â€”"}</p>
+            </div>
+            <div className="rounded-[18px] border border-white/8 bg-black/20 px-3 py-2.5">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">Size</p>
+              <p className="mt-1 text-sm font-semibold text-content-primary">{formatBytes(doc.file_size)}</p>
+            </div>
+            <div className="rounded-[18px] border border-white/8 bg-black/20 px-3 py-2.5">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">Updated</p>
+              <p className="mt-1 text-sm font-semibold text-content-primary">
+                {formatDate(doc.updated_at ?? doc.created_at)}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-end content-between justify-start gap-2 xl:justify-end" onClick={(e) => e.stopPropagation()}>
+          {canIndex ? (
+            <ActionButton
+              label="Index"
+              icon={<Zap className="h-3.5 w-3.5" />}
+              variant="gold"
+              loading={busyAction === "index"}
+              onClick={() => onAction("index")}
+            />
+          ) : null}
+          {canReindex ? (
+            <ActionButton
+              label="Reindex"
+              icon={<RefreshCw className="h-3.5 w-3.5" />}
+              loading={busyAction === "reindex"}
+              onClick={() => onAction("reindex")}
+            />
+          ) : null}
+          {canRetry ? (
+            <ActionButton
+              label="Retry"
+              icon={<RefreshCw className="h-3.5 w-3.5" />}
+              variant="gold"
+              loading={busyAction === "retry"}
+              onClick={() => onAction("retry")}
+            />
+          ) : null}
+          {canDelete ? (
+            <ActionButton
+              label="Delete"
+              icon={<Trash2 className="h-3.5 w-3.5" />}
+              variant="danger"
+              loading={busyAction === "delete"}
+              onClick={() => onAction("delete")}
+            />
+          ) : null}
+          <div className="hidden w-full rounded-[20px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-4 py-3 text-right xl:block">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-content-muted">Retrieval posture</p>
+            <p className="mt-1 text-sm font-medium text-content-primary">
+              {doc.status === "indexed" ? "Live in vector index" : "Awaiting retrieval availability"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PremiumDetailPanel({ doc, busyAction, onAction }: DetailPanelProps) {
+  const canIndex = doc.status === "uploaded" || doc.status === "pending";
+  const canReindex = doc.status === "indexed";
+  const canRetry = doc.status === "failed";
+  const canDelete = doc.status !== "archived";
+  const contentPreview = doc.content
+    ? doc.content.slice(0, 520) + (doc.content.length > 520 ? "â€¦" : "")
+    : null;
+  const previewStyle = documentPreviewStyle(doc.category, doc.title);
+
+  return (
+    <div className="space-y-5">
+      <div className="relative overflow-hidden rounded-[30px] border border-white/10 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.42)]">
+        <div className="absolute inset-0" style={previewStyle} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,8,12,0.12),rgba(7,8,12,0.55)_55%,rgba(7,8,12,0.94))]" />
+        <div className="relative">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.24em] text-brand-gold/90 backdrop-blur-md">
+                <MapPinned className="h-3.5 w-3.5" />
+                Dubai intelligence asset
+              </div>
+              <h3 className="mt-4 max-w-xl text-[1.65rem] font-semibold tracking-[-0.045em] text-white">
+                {doc.title}
+              </h3>
+              <p className="mt-3 max-w-lg text-sm text-white/72">
+                {doc.filename || "Structured knowledge file synchronized with Aurevia's retrieval layer."}
+              </p>
+            </div>
+            <StatusBadge status={doc.status} />
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-3 xl:grid-cols-4">
+            <div className="rounded-[20px] border border-white/10 bg-black/28 px-4 py-3 backdrop-blur-md">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">Category</p>
+              <p className="mt-1.5 text-sm font-medium text-white">{CATEGORY_LABELS[doc.category] ?? doc.category}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/10 bg-black/28 px-4 py-3 backdrop-blur-md">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">Chunks</p>
+              <p className="mt-1.5 text-sm font-medium text-white">{doc.chunk_count || 0}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/10 bg-black/28 px-4 py-3 backdrop-blur-md">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">File size</p>
+              <p className="mt-1.5 text-sm font-medium text-white">{formatBytes(doc.file_size)}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/10 bg-black/28 px-4 py-3 backdrop-blur-md">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">Last indexed</p>
+              <p className="mt-1.5 text-sm font-medium text-white">
+                {doc.last_indexed_at ? formatDate(doc.last_indexed_at) : "Not yet indexed"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+          <div className="flex items-center gap-2">
+            <Database className="h-4 w-4 text-brand-gold/80" />
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-gold/80">Vector retrieval status</p>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <div className="rounded-[20px] border border-white/8 bg-black/18 px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">Source type</p>
+              <p className="mt-1.5 text-sm font-medium capitalize text-content-primary">{doc.source_type ?? "â€”"}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/8 bg-black/18 px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">File type</p>
+              <p className="mt-1.5 text-sm font-medium text-content-primary">{doc.file_type ? `.${doc.file_type}` : "â€”"}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/8 bg-black/18 px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">Uploaded</p>
+              <p className="mt-1.5 text-sm font-medium text-content-primary">{formatDate(doc.created_at)}</p>
+            </div>
+            <div className="rounded-[20px] border border-white/8 bg-black/18 px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-content-muted">State</p>
+              <p className="mt-1.5 text-sm font-medium text-content-primary">{statusTone(doc.status).label}</p>
+            </div>
+          </div>
+          {doc.status === "indexed" ? (
+            <div className="mt-4 rounded-[22px] border border-emerald-500/18 bg-emerald-500/8 px-4 py-3 text-sm text-emerald-300">
+              Document is active in the vector index and ready for premium RAG retrieval across buyer conversations.
+            </div>
+          ) : null}
+          {doc.status === "failed" && doc.error_message ? (
+            <div className="mt-4 rounded-[22px] border border-rose-500/18 bg-rose-500/8 px-4 py-3 text-sm text-rose-300">
+              {doc.error_message}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+          <div className="flex items-center gap-2">
+            <Layers className="h-4 w-4 text-brand-gold/80" />
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-gold/80">Inspector preview</p>
+          </div>
+          <div className="mt-4 rounded-[22px] border border-white/8 bg-black/24 p-4">
+            {contentPreview ? (
+              <p className="whitespace-pre-wrap font-mono text-[12px] leading-6 text-content-secondary">
+                {contentPreview}
+              </p>
+            ) : (
+              <p className="text-sm text-content-secondary">
+                No inline preview available for this asset yet.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 pt-1">
+        {canIndex ? (
+          <ActionButton
+            label="Index now"
+            icon={<Zap className="h-3.5 w-3.5" />}
+            variant="gold"
+            loading={busyAction === "index"}
+            onClick={() => onAction("index")}
+          />
+        ) : null}
+        {canReindex ? (
+          <ActionButton
+            label="Reindex"
+            icon={<RefreshCw className="h-3.5 w-3.5" />}
+            loading={busyAction === "reindex"}
+            onClick={() => onAction("reindex")}
+          />
+        ) : null}
+        {canRetry ? (
+          <ActionButton
+            label="Retry indexing"
+            icon={<RefreshCw className="h-3.5 w-3.5" />}
+            variant="gold"
+            loading={busyAction === "retry"}
+            onClick={() => onAction("retry")}
+          />
+        ) : null}
+        {canDelete ? (
+          <ActionButton
+            label="Delete document"
+            icon={<Trash2 className="h-3.5 w-3.5" />}
+            variant="danger"
+            loading={busyAction === "delete"}
+            onClick={() => onAction("delete")}
+          />
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 // ------------------------------------------------------------------ //
 // Main page                                                             //
 // ------------------------------------------------------------------ //
@@ -774,11 +1113,18 @@ export function KnowledgePageClient() {
           </div>
         }
       >
-        <section className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
+        <section className="relative grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[36px]">
+            <div className="absolute -left-16 top-0 h-56 w-56 rounded-full bg-brand-gold/12 blur-3xl" />
+            <div className="absolute right-0 top-10 h-72 w-72 rounded-full bg-brand-gold/10 blur-3xl" />
+            <div className="absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(circle_at_center_bottom,rgba(255,214,128,0.12),transparent_46%)]" />
+          </div>
           {/* -------------------------------------------------------- */}
           {/* Left: Document library                                     */}
           {/* -------------------------------------------------------- */}
-          <article className="rounded-[30px] border border-white/8 bg-[linear-gradient(160deg,rgba(201,168,76,0.08),rgba(255,255,255,0.02)_30%,rgba(255,255,255,0.02)_100%)] p-6 shadow-card">
+          <article className="relative overflow-hidden rounded-[34px] border border-white/8 bg-[linear-gradient(160deg,rgba(201,168,76,0.12),rgba(255,255,255,0.04)_26%,rgba(8,9,14,0.98)_100%)] p-6 shadow-[0_32px_120px_rgba(0,0,0,0.42)] backdrop-blur-xl">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_22%),radial-gradient(circle_at_top_right,rgba(201,168,76,0.12),transparent_30%)]" />
+            <div className="relative">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/20 bg-brand-gold/10 text-brand-gold">
@@ -786,7 +1132,7 @@ export function KnowledgePageClient() {
                 </div>
                 <div>
                   <p className="label-caps text-brand-gold/80">Document library</p>
-                  <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-content-primary">
+                  <h3 className="mt-1 text-[1.35rem] font-semibold tracking-[-0.045em] text-content-primary">
                     Knowledge assets
                   </h3>
                 </div>
@@ -801,8 +1147,8 @@ export function KnowledgePageClient() {
             </div>
 
             {/* Search + filter */}
-            <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto]">
-              <label className="flex h-11 items-center gap-3 rounded-[14px] border border-white/10 bg-white/5 px-4 text-content-secondary">
+            <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto]">
+              <label className="flex h-12 items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.045] px-4 text-content-secondary backdrop-blur-md">
                 <Search className="h-4 w-4 shrink-0 text-brand-gold" />
                 <input
                   value={query}
@@ -821,7 +1167,7 @@ export function KnowledgePageClient() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="h-11 rounded-[14px] border border-white/10 bg-[#111118] px-3 text-sm text-content-primary outline-none focus:border-brand-gold/30"
+                  className="h-12 rounded-[16px] border border-white/10 bg-[#111118] px-3 text-sm text-content-primary outline-none focus:border-brand-gold/30"
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c.value} value={c.value} className="bg-[#111118]">
@@ -847,7 +1193,7 @@ export function KnowledgePageClient() {
             </div>
 
             {/* List */}
-            <div className="mt-4">
+            <div className="mt-5">
               {isLoading ? (
                 <div className="space-y-3">
                   <ShimmerCard className="h-36 rounded-[22px]" />
@@ -877,9 +1223,9 @@ export function KnowledgePageClient() {
                   }
                 />
               ) : (
-                <div className="space-y-3 max-h-[620px] overflow-y-auto pr-1 scrollbar-thin">
+                <div className="space-y-3 max-h-[720px] overflow-y-auto pr-1 scrollbar-thin">
                   {filtered.map((doc) => (
-                    <DocCard
+                    <KnowledgeRowCard
                       key={doc.id}
                       doc={doc}
                       selected={selectedId === doc.id}
@@ -891,26 +1237,29 @@ export function KnowledgePageClient() {
                 </div>
               )}
             </div>
+            </div>
           </article>
 
           {/* -------------------------------------------------------- */}
           {/* Right: Detail panel                                        */}
           {/* -------------------------------------------------------- */}
-          <article className="rounded-[30px] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.12),rgba(255,255,255,0.02)_38%,rgba(255,255,255,0.01)_100%)] p-6 shadow-card">
+          <article className="relative overflow-hidden rounded-[36px] border border-white/8 bg-[linear-gradient(165deg,rgba(201,168,76,0.16),rgba(255,255,255,0.035)_22%,rgba(8,9,14,0.99)_100%)] p-6 shadow-[0_40px_140px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,220,145,0.16),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.06),transparent_30%)]" />
+            <div className="relative">
             {selectedDoc ? (
               <>
-                <div className="flex items-center gap-3 mb-6">
+                <div className="mb-6 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/20 bg-brand-gold/10 text-brand-gold">
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
                     <p className="label-caps text-brand-gold/80">Asset detail</p>
-                    <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-content-primary">
+                    <h3 className="mt-1 text-[1.45rem] font-semibold tracking-[-0.045em] text-content-primary">
                       Document inspector
                     </h3>
                   </div>
                 </div>
-                <DetailPanel
+                <PremiumDetailPanel
                   doc={selectedDoc}
                   busyAction={busyMap[selectedDoc.id] ?? null}
                   onAction={(action) => void handleAction(selectedDoc.id, action)}
@@ -937,6 +1286,7 @@ export function KnowledgePageClient() {
                 </button>
               </div>
             )}
+            </div>
           </article>
         </section>
       </PageContainer>

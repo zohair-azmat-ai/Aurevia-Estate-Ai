@@ -23,17 +23,20 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-surface-base text-content-primary">
+    <div className="landing-luxury-bg min-h-screen text-content-primary">
       <Navbar />
-      <main>
+      <main className="relative">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(circle_at_50%_0%,rgba(201,168,76,0.14),transparent_42%)]" />
         <Hero />
-        <TrustBar />
-        <Features />
-        <HowItWorks />
-        <ArchitecturePreview />
-        <Showcase />
-        <Integrations />
-        <CTASection />
+        <div className="landing-section-wash">
+          <TrustBar />
+          <Features />
+          <HowItWorks />
+          <ArchitecturePreview />
+          <Showcase />
+          <Integrations />
+          <CTASection />
+        </div>
       </main>
       <Footer />
     </div>

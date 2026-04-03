@@ -82,8 +82,9 @@ export function DashboardShell({ children }: DashboardShellProps) {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-surface-base text-content-primary">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.1),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(59,130,246,0.12),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_22%)]" />
+    <div className="dashboard-premium-bg min-h-screen text-content-primary">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.12),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(68,103,156,0.14),transparent_18%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_16%)]" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-[280px] bg-[linear-gradient(180deg,rgba(255,255,255,0.035),transparent_55%)]" />
 
       <div className="relative flex min-h-screen">
         <div className="hidden xl:fixed xl:inset-y-0 xl:flex xl:w-[310px] xl:flex-col">
@@ -104,7 +105,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
         </Dialog.Root>
 
         <div className="flex min-h-screen w-full flex-col xl:pl-[310px]">
-          <header className="sticky top-0 z-30 border-b border-white/8 bg-[rgba(10,10,15,0.82)] backdrop-blur-xl">
+          <header className="sticky top-0 z-30 border-b border-white/8 bg-[linear-gradient(180deg,rgba(7,9,13,0.92),rgba(8,10,14,0.82))] backdrop-blur-2xl">
             <div className="mx-auto flex w-full max-w-[1600px] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
               <button
                 type="button"
@@ -132,7 +133,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 </div>
                 <p className="mt-1 max-w-2xl text-sm text-content-secondary">{meta.description}</p>
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/15 bg-brand-gold/10 px-3 py-1.5 text-xs font-medium text-brand-gold">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/15 bg-[linear-gradient(180deg,rgba(201,168,76,0.18),rgba(201,168,76,0.08))] px-3 py-1.5 text-xs font-medium text-brand-gold shadow-[0_0_0_1px_rgba(201,168,76,0.04)]">
                     <Sparkles className="h-3.5 w-3.5" />
                     {runtime.label}
                   </span>
@@ -151,7 +152,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               </div>
 
               <div className="hidden min-w-[280px] max-w-[360px] flex-1 xl:block">
-                <label className="flex h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
+                <label className="glass flex h-12 items-center gap-3 rounded-[20px] px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
                   <Search className="h-4.5 w-4.5 text-brand-gold" />
                   <input
                     aria-label="Search dashboard"
@@ -165,7 +166,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 <button
                   type="button"
                   title="Notifications and product health"
-                  className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-content-secondary transition hover:border-brand-gold/25 hover:text-content-primary"
+                  className="glass relative inline-flex h-12 w-12 items-center justify-center rounded-[20px] text-content-secondary transition hover:border-brand-gold/25 hover:text-content-primary"
                   aria-label="Notifications"
                 >
                   <Bell className="h-4.5 w-4.5" />
@@ -174,7 +175,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
                 <Link
                   href="/settings"
-                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 transition hover:border-brand-gold/20 hover:bg-white/7"
+                  className="glass group flex items-center gap-3 rounded-[20px] px-3 py-2.5 transition hover:border-brand-gold/20 hover:bg-white/7"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-gold/20 bg-brand-gold/10 text-sm font-semibold text-brand-gold">
                     {getInitials("Admin Aurevia")}
@@ -188,7 +189,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
             </div>
 
             <div className="border-t border-white/6 px-4 py-3 sm:px-6 xl:hidden">
-              <label className="mx-auto flex w-full max-w-[1600px] items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
+              <label className="glass mx-auto flex w-full max-w-[1600px] items-center gap-3 rounded-[20px] px-4 text-content-secondary transition focus-within:border-brand-gold/35 focus-within:bg-white/8">
                 <Search className="h-4.5 w-4.5 text-brand-gold" />
                 <input
                   aria-label="Search dashboard"
@@ -201,8 +202,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
           <main className="relative flex-1">
             <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-              <div className="rounded-[32px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-3 shadow-card sm:p-4 lg:p-5">
-                <div className={cn("min-h-[calc(100vh-11rem)] rounded-[28px] border border-white/6 bg-[linear-gradient(180deg,rgba(17,17,24,0.88),rgba(10,10,15,0.96))] p-4 transition-all duration-300 motion-safe:animate-[fadeIn_420ms_ease] sm:p-6 lg:p-7")}>
+              <div className="dashboard-frame-outer p-3 sm:p-4 lg:p-5">
+                <div className={cn("dashboard-frame-inner p-4 transition-all duration-300 motion-safe:animate-[fadeIn_420ms_ease] sm:p-6 lg:p-7")}>
                   {children}
                 </div>
               </div>

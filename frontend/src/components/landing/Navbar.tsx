@@ -27,7 +27,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-surface-base/85 backdrop-blur-2xl border-b border-surface-border shadow-[0_1px_0_0_rgba(255,255,255,0.04)]"
+          ? "border-b border-white/8 bg-[linear-gradient(180deg,rgba(7,9,13,0.9),rgba(7,9,13,0.8))] backdrop-blur-2xl shadow-[0_1px_0_0_rgba(255,255,255,0.04)]"
           : "bg-transparent"
       )}
     >
@@ -49,12 +49,12 @@ export default function Navbar() {
         </Link>
 
         {/* ── Desktop Nav ── */}
-        <nav className="hidden md:flex items-center gap-0.5">
+        <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/6 bg-white/[0.03] px-2 py-1 backdrop-blur-xl">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-4 py-2 text-sm text-content-secondary hover:text-content-primary transition-colors duration-200 rounded-lg hover:bg-surface-accent"
+              className="rounded-full px-4 py-2 text-sm text-content-secondary transition-colors duration-200 hover:bg-white/[0.04] hover:text-content-primary"
             >
               {link.label}
             </a>
@@ -63,17 +63,17 @@ export default function Navbar() {
 
         {/* ── Desktop Right ── */}
         <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-full border border-brand-gold/12 bg-brand-gold/10 px-3 py-1.5">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-green opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-status-green" />
             </span>
-            <span className="text-xs text-content-muted">All systems operational</span>
+            <span className="text-xs text-brand-gold/90">All systems operational</span>
           </div>
           <div className="w-px h-4 bg-surface-border" />
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-gold text-surface-base text-sm font-semibold hover:bg-brand-gold-muted transition-all duration-200 shadow-gold hover:shadow-gold-sm"
+            className="flex items-center gap-2 rounded-[14px] border border-brand-gold/22 bg-[linear-gradient(180deg,#e0bf67_0%,#c9a84c_100%)] px-4 py-2 text-sm font-semibold text-surface-base transition-all duration-200 hover:brightness-105 hover:shadow-gold-sm"
           >
             Open Dashboard
             <ArrowRight className="w-3.5 h-3.5" />
@@ -92,7 +92,7 @@ export default function Navbar() {
 
       {/* ── Mobile Menu ── */}
       {mobileOpen && (
-        <div className="md:hidden bg-surface-base/95 backdrop-blur-2xl border-t border-surface-border px-6 py-5 space-y-1">
+        <div className="md:hidden border-t border-white/8 bg-[linear-gradient(180deg,rgba(8,10,14,0.95),rgba(8,10,14,0.92))] px-6 py-5 space-y-1 backdrop-blur-2xl">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}

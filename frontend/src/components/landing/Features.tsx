@@ -97,10 +97,11 @@ const FEATURES: Feature[] = [
 function FeatureCard({ feature }: { feature: Feature }) {
   const Icon = feature.icon;
   return (
-    <div className="group relative p-6 rounded-2xl bg-surface-elevated border border-surface-border hover:border-brand-gold/25 hover:shadow-[0_0_40px_rgba(201,168,76,0.06)] transition-all duration-300 flex flex-col gap-5">
+    <div className="group relative flex flex-col gap-5 overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02)),linear-gradient(180deg,#11151d_0%,#0b0e14_100%)] p-6 transition-all duration-300 hover:border-brand-gold/20 hover:shadow-[0_24px_80px_rgba(0,0,0,0.34)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.08),transparent_26%)] opacity-80" />
       {/* Icon */}
       <div
-        className={`w-11 h-11 rounded-xl ${feature.iconBg} flex items-center justify-center border border-white/[0.04]`}
+        className={`relative flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.04] ${feature.iconBg}`}
       >
         <Icon className={`w-5 h-5 ${feature.iconColor}`} />
       </div>
@@ -132,9 +133,10 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-28 bg-surface-base">
+    <section id="features" className="relative bg-transparent py-28">
       {/* Subtle top separator glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-surface-border to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_center_top,rgba(201,168,76,0.08),transparent_55%)]" />
 
       <div className="max-w-7xl mx-auto px-6">
 
