@@ -2,11 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, ArrowRight, ShieldAlert, Sparkles } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { escalationsApi, leadsApi } from "@/lib/api";
-import type { Escalation, Lead } from "@/lib/types";
-import { CHANNEL_CONFIG, cn, formatRelativeTime } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { escalationsApi, leadsApi } from "../../lib/api";
+import type { Escalation, Lead } from "../../lib/types";
+import { CHANNEL_CONFIG, cn, formatRelativeTime } from "../../lib/utils";
 
 function severityTone(priority: Escalation["priority"]) {
   switch (priority) {

@@ -12,11 +12,11 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { conversationsApi, escalationsApi, followUpsApi, leadsApi } from "@/lib/api";
-import type { Conversation, Escalation, FollowUp, Lead, Message } from "@/lib/types";
-import { CHANNEL_CONFIG, cn, formatDate, formatRelativeTime } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { conversationsApi, escalationsApi, followUpsApi, leadsApi } from "../../lib/api";
+import type { Conversation, Escalation, FollowUp, Lead, Message } from "../../lib/types";
+import { CHANNEL_CONFIG, cn, formatDate, formatRelativeTime } from "../../lib/utils";
 
 function badgeTone(type: "positive" | "neutral" | "sensitive" | "low" | "medium" | "high") {
   switch (type) {

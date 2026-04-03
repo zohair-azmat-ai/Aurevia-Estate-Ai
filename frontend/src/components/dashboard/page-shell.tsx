@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, Clock3, Info, Menu, Search, Sparkles, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { cn, getInitials } from "@/lib/utils";
-import { DashboardSidebar, dashboardNavItems } from "@/components/dashboard/navigation";
-import { getRuntimeModeLabel } from "@/lib/demo";
+import { cn, getInitials } from "../../lib/utils";
+import { DashboardSidebar, dashboardNavItems } from "../../components/dashboard/navigation";
+import { getRuntimeModeLabel } from "../../lib/demo";
 
 const pageMeta: Record<
   string,

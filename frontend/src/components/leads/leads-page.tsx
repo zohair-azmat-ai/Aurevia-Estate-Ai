@@ -12,11 +12,11 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { leadsApi } from "@/lib/api";
-import type { Channel, Lead, LeadIntakePayload, LeadStatus } from "@/lib/types";
-import { CHANNEL_CONFIG, STATUS_CONFIG, cn, formatBudget, formatRelativeTime } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { leadsApi } from "../../lib/api";
+import type { Channel, Lead, LeadIntakePayload, LeadStatus } from "../../lib/types";
+import { CHANNEL_CONFIG, STATUS_CONFIG, cn, formatBudget, formatRelativeTime } from "../../lib/utils";
 
 const leadStatusOptions: Array<{ label: string; value: LeadStatus | "all" }> = [
   { label: "All statuses", value: "all" },

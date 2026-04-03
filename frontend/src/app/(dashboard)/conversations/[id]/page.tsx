@@ -1,4 +1,4 @@
-import { ConversationDetailPage } from "@/components/conversations/conversation-detail-page";
+import { ConversationDetailPage } from "../../../../components/conversations/conversation-detail-page";
 
 export default function ConversationRoute({
   params,

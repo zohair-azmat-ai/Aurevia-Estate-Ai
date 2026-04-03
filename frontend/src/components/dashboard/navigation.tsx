@@ -17,7 +17,7 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export type DashboardNavItem = {
   href: string;

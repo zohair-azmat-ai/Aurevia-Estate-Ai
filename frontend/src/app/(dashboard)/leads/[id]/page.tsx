@@ -1,4 +1,4 @@
-import { LeadDetailPage } from "@/components/leads/lead-detail-page";
+import { LeadDetailPage } from "../../../../components/leads/lead-detail-page";
 
 export default function LeadDetailRoute({
   params,

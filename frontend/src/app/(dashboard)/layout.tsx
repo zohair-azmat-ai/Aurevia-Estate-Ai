@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DashboardShell } from "@/components/dashboard/page-shell";
+import { DashboardShell } from "../../components/dashboard/page-shell";
 
 export const metadata: Metadata = {
   title: "Dashboard",

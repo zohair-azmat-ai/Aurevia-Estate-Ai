@@ -13,8 +13,8 @@ import {
   TrendingUp,
   UsersRound,
 } from "lucide-react";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { formatDateTime } from "@/lib/utils";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { formatDateTime } from "../../lib/utils";
 
 const kpiCards = [
   {

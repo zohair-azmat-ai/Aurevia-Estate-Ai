@@ -10,11 +10,11 @@ import {
   Sparkles,
   TestTube2,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { integrationsApi } from "@/lib/api";
-import type { IntegrationProvider } from "@/lib/types";
-import { formatRelativeTime } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { integrationsApi } from "../../lib/api";
+import type { IntegrationProvider } from "../../lib/types";
+import { formatRelativeTime } from "../../lib/utils";
 
 function statusTone(status: IntegrationProvider["status"]) {
   switch (status) {

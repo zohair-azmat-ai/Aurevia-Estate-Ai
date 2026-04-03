@@ -14,11 +14,11 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { analyticsApi, conversationsApi, escalationsApi, followUpsApi, leadsApi } from "@/lib/api";
-import type { AnalyticsEvent, Conversation, Escalation, FollowUp, Lead, Message } from "@/lib/types";
-import { CHANNEL_CONFIG, STATUS_CONFIG, cn, formatBudget, formatDate, formatRelativeTime } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { analyticsApi, conversationsApi, escalationsApi, followUpsApi, leadsApi } from "../../lib/api";
+import type { AnalyticsEvent, Conversation, Escalation, FollowUp, Lead, Message } from "../../lib/types";
+import { CHANNEL_CONFIG, STATUS_CONFIG, cn, formatBudget, formatDate, formatRelativeTime } from "../../lib/utils";
 
 function propertyTypeLabel(value: string | null) {
   if (!value) return "Unspecified";

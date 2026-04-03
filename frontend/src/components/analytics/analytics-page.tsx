@@ -12,11 +12,11 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
-import { EmptyState, ErrorState, ShimmerCard } from "@/components/ui/data-states";
-import { PageContainer } from "@/components/dashboard/page-shell";
-import { analyticsApi } from "@/lib/api";
-import type { AnalyticsEvent, AnalyticsSummary } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { EmptyState, ErrorState, ShimmerCard } from "../../components/ui/data-states";
+import { PageContainer } from "../../components/dashboard/page-shell";
+import { analyticsApi } from "../../lib/api";
+import type { AnalyticsEvent, AnalyticsSummary } from "../../lib/types";
+import { cn } from "../../lib/utils";
 
 function kpiTone(tone: "brand" | "green" | "blue" | "amber") {
   switch (tone) {

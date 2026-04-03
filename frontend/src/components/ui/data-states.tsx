@@ -1,8 +1,8 @@
 "use client";
 
 import { AlertTriangle, RefreshCw, Search, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { getRuntimeModeLabel, isDemoFallbackEnabled } from "@/lib/demo";
+import { cn } from "../../lib/utils";
+import { getRuntimeModeLabel, isDemoFallbackEnabled } from "../../lib/demo";
 
 export function ShimmerCard({ className }: { className?: string }) {
   return (
