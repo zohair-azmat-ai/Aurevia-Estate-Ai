@@ -28,6 +28,8 @@
   <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
 </p>
 
+**Live Frontend:** [https://aurevia-estate-ai.vercel.app/](https://aurevia-estate-ai.vercel.app/)
+
 </div>
 
 ---
@@ -141,6 +143,10 @@ NEXT_PUBLIC_DEMO_MODE=force      # always demo data — recruiter/portfolio mode
 NEXT_PUBLIC_DEMO_MODE=fallback   # live-first, auto-falls back if backend is down
 NEXT_PUBLIC_DEMO_MODE=off        # live backend only
 ```
+
+## 🌐 Live Deployment
+
+- **Production frontend:** [https://aurevia-estate-ai.vercel.app/](https://aurevia-estate-ai.vercel.app/)
 
 ---
 

@@ -5,6 +5,7 @@ import { ChatWidget } from "../components/chat/chat-widget";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aurevia-estate-ai.vercel.app"),
   title: {
     default: "Aurevia Estate AI",
     template: "%s | Aurevia Estate AI",
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: "https://aurevia-estate-ai.vercel.app/",
     title: "Aurevia Estate AI",
     description: "Intelligent Conversations. Qualified Leads. Closed Deals.",
     siteName: "Aurevia Estate AI",
@@ -32,6 +34,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aurevia Estate AI",
     description: "Intelligent Conversations. Qualified Leads. Closed Deals.",
+  },
+  alternates: {
+    canonical: "https://aurevia-estate-ai.vercel.app/",
   },
   icons: {
     icon: "/favicon.svg",

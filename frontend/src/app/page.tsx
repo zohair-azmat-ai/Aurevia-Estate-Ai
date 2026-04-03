@@ -15,9 +15,13 @@ export const metadata: Metadata = {
   description:
     "AI-powered real estate lead automation. Capture, qualify, and convert leads from WhatsApp, email, and your website — automatically. Built with GPT-4o, Qdrant, FastAPI, and Next.js.",
   openGraph: {
+    url: "https://aurevia-estate-ai.vercel.app/",
     title: "Aurevia Estate AI",
     description: "Intelligent Conversations. Qualified Leads. Closed Deals.",
     type: "website",
+  },
+  alternates: {
+    canonical: "https://aurevia-estate-ai.vercel.app/",
   },
 };
 
